@@ -25,16 +25,24 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<APIResponse<CreateUserResponse>> createUser(
-            @Valid @RequestBody CreateUserRequest request) {
-        log.info("Received request to create user: username={}, email={}, mobile={}, age={}", request.getUsername(),
-                request.getEmail(), request.getMobile(), request.getAge());
-        CreateUserResponse createdUser = userService.createUser(request);
-        APIResponse<CreateUserResponse> response = new APIResponse<CreateUserResponse>(
-                201,
-                true,
-                "User created successfully",
-                createdUser);
-        return ResponseEntity.ok(response);
-
+            @Valid @RequestBody CreateUserRequest payload) {
+        try {
+            log.info("Received request to create user: username={}, email={}, mobile={}, age={}", payload.getUsername(),
+                    payload.getEmail(), payload.getMobile(), payload.getAge());
+            CreateUserResponse createdUser = userService.createUser(payload);
+            APIResponse<CreateUserResponse> response = new APIResponse<CreateUserResponse>(
+                    201,
+                    true,
+                    "User created successfully",
+                    createdUser);
+            return ResponseEntity.ok(response);
+        } catch (Exception ex) {
+            APIResponse<CreateUserResponse> errorResponse = new APIResponse<>(
+                    400,
+                    false,
+                    ex.getMessage(),
+                    null);
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
     }
 }

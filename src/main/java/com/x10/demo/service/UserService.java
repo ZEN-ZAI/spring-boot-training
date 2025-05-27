@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    public CreateUserResponse createUser(CreateUserRequest request) {
+    public CreateUserResponse createUser(CreateUserRequest model) {
         return new CreateUserResponse(
-                request.getUsername(),
-                request.getEmail(),
-                request.getMobile(),
-                request.getAge());
+                model.getUsername(),
+                model.getEmail(),
+                model.getMobile(),
+                model.getAge());
     }
 }

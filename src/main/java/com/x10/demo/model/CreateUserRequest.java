@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateUserRequest {
     @NotBlank(message = "Username is required and cannot be blank.")
-    @Size(min = 3, message = "Username must be at least 3 characters long.")
+    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters long.")
     private String username;
 
     @NotBlank(message = "Email is required and cannot be blank.")
