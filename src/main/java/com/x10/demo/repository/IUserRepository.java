@@ -6,10 +6,4 @@ import com.x10.demo.entity.UserEntity;
 
 public interface IUserRepository extends JpaRepository<UserEntity, Long> {
 
-    UserEntity findByUsername(String username);
-
-    UserEntity findByEmail(String email);
-
-    UserEntity findByMobile(String mobile);
-
 }
